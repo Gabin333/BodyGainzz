@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BodyGainzz - Sujets</title>
+
+  <!-- Polices Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome + Bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Ton fichier CSS -->
+  <link rel="stylesheet" href="../CSS/topic.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- ✅ Navbar -->
+  <nav class="navbar navbar-light bg-white px-3">
+    <button class="navbar-toggler menu-toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuHamburger" aria-controls="menuHamburger" aria-label="Toggle menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand mx-auto" href="accueil.html">
+      <img src="../images/Logo.png" alt="Logo" width="100" id="Logo">
+    </a>
+
+    <img src="../images/Image profil.png" alt="Profil" class="rounded-circle object-fit-cover" style="width: 60px; height: 60px;" id="Photo_profil">
+  </nav>
+
+  <!-- ✅ Menu hamburger -->
+  <div class="offcanvas offcanvas-start text-center" tabindex="-1" id="menuHamburger">
+    <div class="offcanvas-header justify-content-center">
+      <h5 class="offcanvas-title mx-auto">Catégories</h5>
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body flex-column justify-content-center">
+      <ul class="list-unstyled">
+        <li><a href="accueil.html" class="nav-link py-2">Accueil</a></li>
+        <li><a href="catégorie_entrainement.html" class="nav-link py-2">Entraînement</a></li>
+        <li><a href="categorie.html" class="nav-link py-2">Nutrition</a></li>
+        <li><a href="categorie.html" class="nav-link py-2">Récupération & Divers</a></li>
+        <hr>
+        <li><a href="connexion.html" class="nav-link py-2">Connexion</a></li>
+        <li><a href="profil.html" class="nav-link py-2">Mon Profil</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ✅ Contenu principal -->
+  <main class="flex-grow-1">
+    <div class="container mt-4">
+      <!-- Barre de recherche -->
+      <form class="search-container" action="#" method="GET">
+        <input type="text" class="form-control" name="q" placeholder="Rechercher un sujet..." />
+        <button type="submit" class="search-icon-button">
+          <i class="fas fa-search search-icon"></i>
+        </button>
+      </form>
+
+      <!-- Titre + sujets -->
+      <h3 class="mt-4">Quelle est la meilleure amplitude de mouvement ?</h3>
+
+      <div class="border p-2 mb-3"><strong>John Dea</strong> – 13/05/2025<br/>Voir plus...</div>
+      <div class="border p-2 mb-3"><strong>IronMax</strong> – 13/05/2025<br/>Voir plus...</div>
+      <div class="border p-2 mb-3"><strong>BulkKing</strong> – 13/05/2025<br/>Voir plus...</div>
+
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Discussion...">
+        <button class="btn btn-dark">PUBLIER</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ✅ Footer -->
+  <footer class="bg-black text-white text-center py-3 mt-auto w-100">
+    <div class="container">
+      <p class="mb-2" style="font-weight: 500; font-size: 0.95rem;">
+        BodyGainzz - Le forum pour ceux qu'ils veulent progresser
+      </p>
+      <div style="font-size: 0.85rem;">
+        <a href="#" class="text-secondary me-3 text-decoration-none">CGU</a>
+        <a href="#" class="text-secondary me-3 text-decoration-none">Politique</a>
+        <a href="#" class="text-secondary text-decoration-none">Contact</a>
+      </div>
+      <p class="mt-2 mb-0 text-secondary" style="font-size: 0.75rem;">
+        © 2025 BodyGainzz
+      </p>
+    </div>
+  </footer>
+  <div id="topic-container"></div>
+  <!-- ✅ JS menu hamburger -->
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const offcanvas = document.getElementById('menuHamburger');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.add('rotating');
+      menuToggle.classList.remove('returning');
+    });
+
+    offcanvas.addEventListener('hidden.bs.offcanvas', () => {
+      menuToggle.classList.remove('rotating');
+      menuToggle.classList.add('returning');
+
+      setTimeout(() => {
+        menuToggle.classList.remove('returning');
+      }, 600);
+    });
+
+  function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+  const topicId = getQueryParam('id');
+
+  fetch('../data/topics.json')
+    .then(res => res.json())
+    .then(topics => {
+      const topic = topics.find(t => t.id == topicId);
+      if (topic) {
+        document.getElementById('topic-container').innerHTML = `
+          <h1>${topic.title}</h1>
+          <p>${topic.content}</p>
+          `;
+          } else {
+        document.getElementById('topic-container').innerHTML = `<p>Sujet introuvable.</p>`;
+      }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Administration - BodyGainzz</title>
+  <link rel="stylesheet" href="../CSS/admin.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="admin-container">
+    <h1>Panel d’administration</h1>
+    <nav>
+      <ul>
+        <li><a href="#users">Gérer les utilisateurs</a></li>
+        <li><a href="#topics">Gérer les sujets</a></li>
+        <li><a href="#categories">Gérer les catégories</a></li>
+      </ul>
+    </nav>
+    <section id="users">
+      <h2>Utilisateurs</h2>
+      <p>Liste, suppression ou modification des comptes utilisateurs.</p>
+      <!-- À compléter avec du JS ou du backend -->
+    </section>
+    <section id="topics">
+      <h2>Sujets</h2>
+      <p>Gestion des sujets du forum (modération, suppression, édition).</p>
+      <!-- À compléter -->
+    </section>
+    <section id="categories">
+      <h2>Catégories</h2>
+      <p>Ajouter, modifier ou supprimer des catégories du forum.</p>
+      <!-- À compléter -->
+    </section>
+  </div>
+  <script>
+    // Exemple de JS pour afficher un message d'accès réservé (à adapter selon ton backend)
+document.addEventListener('DOMContentLoaded', function() {
+  // Simuler un contrôle d'accès (à remplacer par une vraie vérification)
+  const isAdmin = true; // Remplace par une vraie vérification côté serveur
+
+  if (!isAdmin) {
+    document.body.innerHTML = `
+      <div style="text-align:center;margin-top:20vh;">
+        <h1>Accès refusé</h1>
+        <p>Vous n'avez pas les droits pour accéder à cette page.</p>
+        <a href="index.html" style="color:#fff;background:#000;padding:10px 20px;border-radius:4px;text-decoration:none;">Retour à l'accueil</a>
+      </div>
+    `;
+  }
+});
+</script>
+</body>
+
+
+</html>
